@@ -40,12 +40,25 @@ function initMap()
         .then(data => {
             // Wybierz tylko Polskę z danych
             var polandGeoJSON = data.find(country => country.name.commo === 'Poland');
-            
-            // Dodaj granice Polski do mapy
-            L.geoJSON(polishBorders).addTo(map);
-            
-            // Dopasuj widok do granic Polski
-            map.fitBounds(L.geoJSON(polishBorders).getBounds());
+
+			// Sprawdź czy udało się znaleźć Polskę
+			if (polandGeoJSON) {
+				// Utwórz mapę i ustaw początkowy widok
+				var map = L.map('map').setView([0, 0], 2);
+
+				// Dodaj kafelki z OpenStreetMap
+				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					maxZoom: 19,
+				}).addTo(map);
+
+				// Dodaj granice Polski do mapy
+				L.geoJSON(polandGeoJSON).addTo(map);
+
+				// Dopasuj widok do granic Polski
+				map.fitBounds(L.geoJSON(polandGeoJSON).getBounds());
+			} else {
+				console.error('Nie udało się znaleźć Polski w danych.');
+			}
         });
 }
 
