@@ -53,6 +53,8 @@ function setCountry()
 				.bindPopup(country.capital_name + ' - ' + 'capital of ' + country.country_name)
 				.openPopup();
 			layers.push(layer);
+			let bounds = L.latLngBounds([layer.getLatLng()]);
+			map.fitBounds(bounds);
 		} else {
 			map.setView(defaultCoordinates, 6);
 		}
