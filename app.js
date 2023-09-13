@@ -1,7 +1,7 @@
 // const countries_select2_format = require('./countries_with_capitals.json');
 
 function countriesSelect2Format() {
-    $.getJSON("https://drive.google.com/file/d/1F7TXb2cxs7zw6saegnA9kGg6s1NMXuS1/view?usp=drive_link", function (data) {
+    $.getJSON("./countries_with_capitals.json", function (data) {
 	  console.log(data);
 	})
 }
@@ -35,7 +35,7 @@ function initMap()
     }).addTo(map);
 
     // Wczytaj dane GeoJSON z pliku
-    fetch('https://drive.google.com/file/d/1o29UjyYoEgCVTCrFR9D0RZjZNUV5xaU6/view?usp=drive_link')
+    fetch('./countries.json')
         .then(response => response.json())
         .then(data => {
             // Wybierz tylko Polskę z danych
